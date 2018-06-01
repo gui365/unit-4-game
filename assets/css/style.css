@@ -1,0 +1,11 @@
+body {
+    color: black;
+}
+
+#char3 {
+    background-image: url("../images/char3.jpg");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    width: 150px;
+    height: 160px;
+}
