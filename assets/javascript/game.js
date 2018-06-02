@@ -18,7 +18,7 @@ for (var i = 0; i < rpgGame.characters.length; i++) {
     // Create a div for each character
     var thisChar = "char" + i;
     var charDiv = $("<div>");
-    charDiv.addClass("char-card");
+    charDiv.addClass("char-card hover-on");
     charDiv.attr("id", thisChar);
     charDiv.attr("data-id", i);
     charDiv.attr("data-life", rpgGame.characters[i].life);
@@ -52,6 +52,7 @@ $(".char-card").on("click", function() {
         $("#battle-player").append($(selectedPlayer));
         rpgGame.player++;
         rpgGame.characters[$(this).attr("data-id")].player = true;
+        $(selectedPlayer).removeClass("hover-on");
     };
 
 });
@@ -59,22 +60,26 @@ $(".char-card").on("click", function() {
 console.log(rpgGame.player);
 
 
+
 // Animations
-// if ($(this).attr("data-player") === false && $(this).attr("data-enemy") === false) {
-    $(".char-card").hover(function(){
+    // On mouse over - Cards
+    $(document).on("mouseover", ".hover-on", function(){
         $(this).css('z-index', "20");
         $(this).animate({
             width: "180px",
             height: "230px",
         }, "fast");
-    }, function() {
+    });
+
+    // On mouse leave - Cards
+    $(document).on("mouseleave", ".hover-on", function(){
         $(this).css('z-index', "2");
         $(this).animate({
-            width: "156px",
-            height: "200px"
+            width: "140px",
+            height: "180px"
         }, "fast");
     });
-// }
+
 
 
 });

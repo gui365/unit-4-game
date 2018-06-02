@@ -21,8 +21,8 @@ body {
     box-shadow: 0px 0px 0px 1px rgb(71, 71, 71),
                 5px 5px 15px rgb(37, 37, 37);
     z-index: 2;
-    width: 156px;
-    height: 200px;
+    width: 140px;
+    height: 180px;
     margin-right: -60px;
     background-image: url("../images/back-card.jpg");
     background-size: cover;
