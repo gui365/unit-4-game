@@ -36,8 +36,13 @@ var rpgGame = {
     },
 
     confirm: function() {
-        console.log("this");
-        
+        $("#confirmButton").remove();
+        $("#repickButton").remove();
+        var button = $("<button>ATTACK</button>");
+        button.attr("id", "attackButton");
+        button.append("&nbsp;");
+        button.append($("<i>").addClass("fas fa-arrow-circle-right"));
+        $(".battle").append(button);
     }
 };
 
@@ -106,6 +111,7 @@ $(".char-card").on("click", function() {
             $(".battle").append($(repickButton));
             var changeIcon = $("<i>");
             changeIcon.addClass("fas fa-sync");
+            repickButton.attr("id", "repickButton");
             repickButton.prepend("&nbsp;");
             repickButton.prepend(changeIcon);
 

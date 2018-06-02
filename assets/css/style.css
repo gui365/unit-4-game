@@ -38,6 +38,13 @@ body {
 
 #char-select, #instructions {
   width: 100%;
+  text-align: center;
+}
+
+#instructions {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0.5rem 0;
 }
 
 #char0 {
@@ -72,7 +79,7 @@ body {
 }
 
 #battle-arena {
-  background-color: white;
+  /* background-color: white; */
   position: fixed;
   bottom: 40px;
   width: 100%;
@@ -101,4 +108,11 @@ body {
 .battle button {
   width: 100%;
   margin-bottom: 0.5rem;
+}
+
+#attackButton {
+  background-color: rgb(192, 26, 26);
+  color: white;
+  font-weight: 700;
+  padding: 0.5rem;
 }
