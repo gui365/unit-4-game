@@ -7,12 +7,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="./assets/css/reset.css" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700" rel="stylesheet">
     <link rel="stylesheet" type="text/css" media="screen" href="./assets/css/style.css" />
     <script src="https://code.jquery.com/jquery.js"></script>
 </head>
-<body>
-    <div id="char-select"></div>
 
+<body>
+    <div id="char-select" class="flex"></div>
+    <div id="battle-arena" class="flex">
+        <div id="battle-player" class="battle flex"></div>
+        <div class="battle flex"><img id="versus" src="./assets/images/vs.png" alt="VS" style="width: 100px"></div>
+        <div id="battle-enemy" class="battle flex"></div>
+    </div>
 
 
 
