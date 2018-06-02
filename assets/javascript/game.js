@@ -10,8 +10,39 @@ var rpgGame = {
                 { name: "Yoda", life: 175, attack: 12, counterAttack: 15, player: false, enemy: false },
                 { name: "Darth Vader", life: 250, attack: 10, counterAttack: 20, player: false, enemy: false } ],
     player: false,
-    enemy: false
+    enemy: false,
+    firstInstruction: function() {
+        $("#instructions").text("Select your character");
+    },
+
+    repick: function(){
+        var player = $("#battle-player").find(".char-card");
+        player.css({"z-index": "2", "width": "156px", "height": "200px"});
+        player.addClass("hover-on");
+        $("#char-select").append(player);
+
+        var enemy = $("#battle-enemy").find(".char-card");
+        enemy.css({"z-index": "2", "width": "156px", "height": "200px"});
+        enemy.addClass("hover-on");
+        $("#char-select").append(enemy);
+
+        rpgGame.player = false;
+        rpgGame.enemy = false;
+        $(this).remove();
+        $("#versus").remove();
+        $("#confirmButton").remove();
+
+        rpgGame.firstInstruction();
+    },
+
+    confirm: function() {
+        console.log("this");
+        
+    }
 };
+
+// First instruction
+rpgGame.firstInstruction();
 
 // Dynamically creating the cards
 for (var i = 0; i < rpgGame.characters.length; i++) {
@@ -45,21 +76,52 @@ for (var i = 0; i < rpgGame.characters.length; i++) {
 };
 
 
-// Choosing the player
+// Choosing the player and enemy
 $(".char-card").on("click", function() {
+
         if (rpgGame.player === false && rpgGame.enemy === false) {
             var selectedPlayer = "#char" + $(this).attr("data-id");
             $("#battle-player").append($(selectedPlayer));
             rpgGame.player = true;
             rpgGame.characters[$(this).attr("data-id")].player = true;
             $(selectedPlayer).removeClass("hover-on");
+            var imageVersus = $("<img>");
+            imageVersus.attr("id", "versus");
+            imageVersus.attr("src", "./assets/images/vs.png");
+            imageVersus.attr("alt", "VS");
+            $(".battle").append(imageVersus);
+
+            $("#instructions").empty();
+            $("#instructions").text("Choose your enemy");
+
         } else if (rpgGame.player === true && rpgGame.enemy === false) {
             var selectedEnemy = "#char" + $(this).attr("data-id");
             $("#battle-enemy").append($(selectedEnemy));
             rpgGame.enemy = true;
             rpgGame.characters[$(this).attr("data-id")].enemy = true;
             $(selectedEnemy).removeClass("hover-on");
+
+            var repickButton = $("<button>Pick again</button>");
+            repickButton.click(rpgGame.repick);
+            $(".battle").append($(repickButton));
+            var changeIcon = $("<i>");
+            changeIcon.addClass("fas fa-sync");
+            repickButton.prepend("&nbsp;");
+            repickButton.prepend(changeIcon);
+
+            var confirmButton = $("<button>Fight!</button>");
+            confirmButton.click(rpgGame.confirm);
+            confirmButton.attr("id", "confirmButton")
+            $(".battle").append($(confirmButton));
+            var changeIcon = $("<i>");
+            changeIcon.addClass("fas fa-thumbs-up");
+            confirmButton.prepend("&nbsp;");
+            confirmButton.prepend(changeIcon);
+
+            $("#instructions").empty();
         };
+
+        
     });
 
 
@@ -71,8 +133,8 @@ $(".char-card").on("click", function() {
     $(document).on("mouseover", ".hover-on", function(){
         $(this).css('z-index', "20");
         $(this).animate({
-            width: "13vw",
-            height: "35vh",
+            width: "180px",
+            height: "230px",
         }, "fast");
     });
 
@@ -80,8 +142,8 @@ $(".char-card").on("click", function() {
     $(document).on("mouseleave", ".hover-on", function(){
         $(this).css('z-index', "2");
         $(this).animate({
-            width: "11vw",
-            height: "32vh"
+            width: "156px",
+            height: "200px"
         }, "fast");
     });
 

@@ -1,92 +1,104 @@
 body {
-    color: black;
-    font-family: "Roboto", Arial, Helvetica, sans-serif;
-    margin-top: 2rem;
-    background-color: rgb(138, 138, 138);
+  color: black;
+  font-family: "Roboto", Arial, Helvetica, sans-serif;
+  margin-top: 2rem;
+  background-color: rgb(138, 138, 138);
 }
 
 .flex {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-}
-
-.space-around {
-    justify-content: space-around;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 .bold {
-    font-weight: 700;
+  font-weight: 700;
 }
 
 .char-card {
-    border: 6px white solid;
-    border-radius: 20px;
-    box-shadow: 0px 0px 0px 1px rgb(71, 71, 71),
-                5px 5px 15px rgb(37, 37, 37);
-    z-index: 2;
-    width: 11vw;
-    height: 32vh;
-    margin-right: -60px;
-    background-image: url("../images/back-card.jpg");
-    background-size: cover;
-    background-repeat: no-repeat;
-    color: white;
-    position: relative;
+  border: 6px white solid;
+  border-radius: 20px;
+  box-shadow: 0px 0px 0px 1px rgb(71, 71, 71),
+        5px 5px 15px rgb(37, 37, 37);
+  z-index: 2;
+  width: 156px;
+  height: 200px;
+  margin-right: -60px;
+  background-image: url("../images/back-card.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: white;
+  position: relative;
 }
 
-/* .char-card img {
-    width: 115px;
-    height: 140px;
-} */
+.char-card i {
+  color: rgb(206, 27, 27);
+}
 
-i {
-    color: rgb(206, 27, 27);
+#char-select, #instructions {
+  width: 100%;
 }
 
 #char0 {
-    background-image: url("../images/0.png");
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
+  background-image: url("../images/0.png");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
 
 }
 
 #char1 {
-    background-image: url("../images/1.png");
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
+  background-image: url("../images/1.png");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
 }
 
 #char2 {
-    background-image: url("../images/2.png");
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
+  background-image: url("../images/2.png");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
 }
 
 #char3 {
-    background-image: url("../images/3.png");
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
+  background-image: url("../images/3.png");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
 }
 
 .char-stats-div {
-    position: absolute;
-    bottom: 10px;
-    left: 15px;
+  position: absolute;
+  bottom: 10px;
+  left: 15px;
 }
 
 #battle-arena {
-    background-color: white;
-    position: fixed;
-    bottom: 40px;
-    width: 100%;
+  background-color: white;
+  position: fixed;
+  bottom: 40px;
+  width: 100%;
 }
 
 #battle-player, #battle-enemy {
-    border: 1px dotted black;
-    width: 40%;
+  /* border: 1px dotted black; */
+}
+
+#battle-player div, #battle-enemy div {
+  margin: 0;
 }
 
 .battle {
-    align-items: center;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+
+#versus {
+  width: 100px;
+  margin: 0 1rem;
+}
+
+.battle button {
+  width: 100%;
+  margin-bottom: 0.5rem;
 }
