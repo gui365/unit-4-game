@@ -9,8 +9,8 @@ var rpgGame = {
                 { name: "Jar Jar Binks", life: 120, attack: 5, counterAttack: 35, player: false, enemy: false },
                 { name: "Yoda", life: 175, attack: 12, counterAttack: 15, player: false, enemy: false },
                 { name: "Darth Vader", life: 250, attack: 10, counterAttack: 20, player: false, enemy: false } ],
-    player: 0,
-    enemy: 0
+    player: false,
+    enemy: false
 };
 
 // Dynamically creating the cards
@@ -47,17 +47,22 @@ for (var i = 0; i < rpgGame.characters.length; i++) {
 
 // Choosing the player
 $(".char-card").on("click", function() {
-    if (rpgGame.player === 0) {
-        var selectedPlayer = "#char" + $(this).attr("data-id");
-        $("#battle-player").append($(selectedPlayer));
-        rpgGame.player++;
-        rpgGame.characters[$(this).attr("data-id")].player = true;
-        $(selectedPlayer).removeClass("hover-on");
-    };
+        if (rpgGame.player === false && rpgGame.enemy === false) {
+            var selectedPlayer = "#char" + $(this).attr("data-id");
+            $("#battle-player").append($(selectedPlayer));
+            rpgGame.player = true;
+            rpgGame.characters[$(this).attr("data-id")].player = true;
+            $(selectedPlayer).removeClass("hover-on");
+        } else if (rpgGame.player === true && rpgGame.enemy === false) {
+            var selectedEnemy = "#char" + $(this).attr("data-id");
+            $("#battle-enemy").append($(selectedEnemy));
+            rpgGame.enemy = true;
+            rpgGame.characters[$(this).attr("data-id")].enemy = true;
+            $(selectedEnemy).removeClass("hover-on");
+        };
+    });
 
-});
 
-console.log(rpgGame.player);
 
 
 
@@ -66,8 +71,8 @@ console.log(rpgGame.player);
     $(document).on("mouseover", ".hover-on", function(){
         $(this).css('z-index', "20");
         $(this).animate({
-            width: "180px",
-            height: "230px",
+            width: "13vw",
+            height: "35vh",
         }, "fast");
     });
 
@@ -75,8 +80,8 @@ console.log(rpgGame.player);
     $(document).on("mouseleave", ".hover-on", function(){
         $(this).css('z-index', "2");
         $(this).animate({
-            width: "140px",
-            height: "180px"
+            width: "11vw",
+            height: "32vh"
         }, "fast");
     });
 
