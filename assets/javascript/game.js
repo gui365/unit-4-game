@@ -19,11 +19,19 @@ var rpgGame = {
         var player = $("#battle-player").find(".char-card");
         player.css({"z-index": "2", "width": "156px", "height": "200px"});
         player.addClass("hover-on");
+        player.removeAttr("id");
+        player.removeAttr("data-selected");
+        var playerId = $("#battle-player").find(".char-card").attr("data-id");
+        player.attr("id", "char" + playerId);
         $("#char-select").append(player);
 
         var enemy = $("#battle-enemy").find(".char-card");
         enemy.css({"z-index": "2", "width": "156px", "height": "200px"});
         enemy.addClass("hover-on");
+        enemy.removeAttr("id");
+        enemy.removeAttr("data-selected");
+        var enemyId = $("#battle-enemy").find(".char-card").attr("data-id");
+        enemy.attr("id", "char" + enemyId);
         $("#char-select").append(enemy);
 
         rpgGame.player = false;
@@ -41,39 +49,80 @@ var rpgGame = {
         $("#versus").remove();
         var button = $("<button>ATTACK</button>");
         button.attr("id", "attackButton");
+        button.on("click", rpgGame.attack);
         button.append("&nbsp;");
         button.append($("<i>").addClass("fas fa-arrow-circle-right"));
         $(".battle").append(button);
+        $("#instructions").text("Fight!");
         rpgGame.charInactive();
     },
 
-    // This doesn't work
+    // This function will make the unselected characters "inactive" while battle is in progress
     charInactive: function() {
         for (var i = 0; i < rpgGame.characters.length; i++) {
-            // var charUnselected = [];
-            // charUnselected.push($("#char-select").find($(".char-card")));
-            // var charIndex = charUnselected[i].attr("data-id");
-            // console.log(i);
-            // console.log(charIndex);
-            // charUnselected[i].removeAttr("id");
-            // charUnselected[i].removeClass("hover-on");
-            // charUnselected[i].attr("id", "char" + charIndex + "-gs");
-            // $("#char-unselected").append(charUnselected[i]);
             var charUnselected = $("#char" + i);
 
             if (!charUnselected.attr("data-selected") === true) {
-                charUnselected.removeAttr("id");
                 charUnselected.removeClass("hover-on");
                 charUnselected.attr("id", "char" + i + "-gs");
+                charUnselected.addClass("grey-font");
             };
-            
-            
+        };
+    },
+
+    // This function will make the unselected characters available again after battle is finished
+    charActive: function() {
+        for (var i = 0; i < rpgGame.characters.length; i++) {
+            var charUnselected = $("#char" + i + "-gs");
+                charUnselected.removeAttr("id");
+                charUnselected.attr("id", "char" + i);
+                charUnselected.addClass("hover-on");
         }
+    },
+
+    attack: function() {
+        // Get attack and life values from player, and the counter attack and life values from enemy
+        var playerIndex = $("#battle-player").find($(".char-card")).attr("data-id");
+        var playerAttack = rpgGame.characters[playerIndex].attack;
+        // This will be the updated attack value after each press of the 'attack' button
+        var playerHitPoints = rpgGame.characters[playerIndex].attack;
+        var playerLife = rpgGame.characters[playerIndex].life;
+        var playerName = rpgGame.characters[playerIndex].name;
+        
+        var enemyIndex = $("#battle-enemy").find($(".char-card")).attr("data-id");
+        var enemyCounterAttack = rpgGame.characters[enemyIndex].counterAttack;
+        var enemyLife = rpgGame.characters[enemyIndex].life;
+        var enemyName = rpgGame.characters[enemyIndex].name;
+
+        // Substract player's attack value from enemy's life
+        enemyLife -= playerHitPoints;
+        playerHitPoints = playerHitPoints + playerAttack;
+        
+        
+        console.log(enemyLife);
+        console.log(rpgGame.characters[enemyIndex].life);
+        console.log(playerHitPoints);
+        
+        
+
+        $("#battle-result").text("You attacked " + enemyName + " for " + playerAttack + " damage");
+        
+
+        // Append the new life value to the enemy card
+        // Increase player's attack value by its original value
+
+        
+        // Substract that value from player's life
+
+        // Conditional statement determines if player or enemy won
+        // Act accordingly
     }
 };
 
+
 // First instruction
 rpgGame.firstInstruction();
+
 
 // Dynamically creating the cards
 for (var i = 0; i < rpgGame.characters.length; i++) {
@@ -181,7 +230,5 @@ $(".char-card").on("click", function() {
             height: "200px"
         }, "fast");
     });
-
-
 
 });
