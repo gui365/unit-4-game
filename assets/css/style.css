@@ -36,46 +36,68 @@ body {
   color: rgb(206, 27, 27);
 }
 
-#char-select, #instructions {
+#char-select, #instructions, #battle-result {
   width: 100%;
   text-align: center;
 }
 
-#instructions {
-  font-size: 2rem;
+.message {
   font-weight: 700;
   margin: 0.5rem 0;
 }
 
-#char0 {
-  background-image: url("../images/0.png");
+#instructions {
+  font-size: 2rem;
+}
+
+#battle-result {
+  font-size: 1.5rem;
+}
+
+.char-img {
   background-size: 100% 100%;
   background-repeat: no-repeat;
+}
 
+#char0 {
+  background-image: url("../images/0.png");
 }
 
 #char1 {
   background-image: url("../images/1.png");
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
 }
 
 #char2 {
   background-image: url("../images/2.png");
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
 }
 
 #char3 {
   background-image: url("../images/3.png");
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
+}
+
+#char0-gs {
+  background-image: url("../images/0-gs.png");
+}
+
+#char1-gs {
+  background-image: url("../images/1-gs.png");
+}
+
+#char2-gs {
+  background-image: url("../images/2-gs.png");
+}
+
+#char3-gs {
+  background-image: url("../images/3-gs.png");
 }
 
 .char-stats-div {
   position: absolute;
   bottom: 10px;
-  left: 15px;
+  left: 5px;
+  width: 90%;
+  text-align: left;
+  padding-left: 0.5rem;
 }
 
 #battle-arena {
@@ -115,4 +137,10 @@ body {
   color: white;
   font-weight: 700;
   padding: 0.5rem;
+  border-radius: 50%;
+  width: 90px;
+  height: 90px;
+  margin: 0 1rem;
+  box-shadow: 0 3px 3px 1px rgb(48, 47, 47, 0.7);
+  font-size: 1.1rem;
 }

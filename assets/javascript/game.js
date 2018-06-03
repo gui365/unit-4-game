@@ -38,11 +38,37 @@ var rpgGame = {
     confirm: function() {
         $("#confirmButton").remove();
         $("#repickButton").remove();
+        $("#versus").remove();
         var button = $("<button>ATTACK</button>");
         button.attr("id", "attackButton");
         button.append("&nbsp;");
         button.append($("<i>").addClass("fas fa-arrow-circle-right"));
         $(".battle").append(button);
+        rpgGame.charInactive();
+    },
+
+    // This doesn't work
+    charInactive: function() {
+        for (var i = 0; i < rpgGame.characters.length; i++) {
+            // var charUnselected = [];
+            // charUnselected.push($("#char-select").find($(".char-card")));
+            // var charIndex = charUnselected[i].attr("data-id");
+            // console.log(i);
+            // console.log(charIndex);
+            // charUnselected[i].removeAttr("id");
+            // charUnselected[i].removeClass("hover-on");
+            // charUnselected[i].attr("id", "char" + charIndex + "-gs");
+            // $("#char-unselected").append(charUnselected[i]);
+            var charUnselected = $("#char" + i);
+
+            if (!charUnselected.attr("data-selected") === true) {
+                charUnselected.removeAttr("id");
+                charUnselected.removeClass("hover-on");
+                charUnselected.attr("id", "char" + i + "-gs");
+            };
+            
+            
+        }
     }
 };
 
@@ -54,7 +80,7 @@ for (var i = 0; i < rpgGame.characters.length; i++) {
     // Create a div for each character
     var thisChar = "char" + i;
     var charDiv = $("<div>");
-    charDiv.addClass("char-card hover-on");
+    charDiv.addClass("char-card hover-on char-img");
     charDiv.attr("id", thisChar);
     charDiv.attr("data-id", i);
     charDiv.attr("data-life", rpgGame.characters[i].life);
@@ -89,7 +115,9 @@ $(".char-card").on("click", function() {
             $("#battle-player").append($(selectedPlayer));
             rpgGame.player = true;
             rpgGame.characters[$(this).attr("data-id")].player = true;
+            $(selectedPlayer).attr("data-selected", true);
             $(selectedPlayer).removeClass("hover-on");
+            
             var imageVersus = $("<img>");
             imageVersus.attr("id", "versus");
             imageVersus.attr("src", "./assets/images/vs.png");
@@ -104,6 +132,7 @@ $(".char-card").on("click", function() {
             $("#battle-enemy").append($(selectedEnemy));
             rpgGame.enemy = true;
             rpgGame.characters[$(this).attr("data-id")].enemy = true;
+            $(selectedEnemy).attr("data-selected", true);
             $(selectedEnemy).removeClass("hover-on");
 
             var repickButton = $("<button>Pick again</button>");
