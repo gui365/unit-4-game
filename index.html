@@ -3,28 +3,39 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Star Wars RPG Game</title>
+    <title>STAR WARS | Battle Arena</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="./assets/css/reset.css" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Exo+2:700|Roboto+Condensed:400,700" rel="stylesheet">
     <link rel="stylesheet" type="text/css" media="screen" href="./assets/css/style.css" />
     <script src="https://code.jquery.com/jquery.js"></script>
 </head>
 
-<body class="flex">
+<body class="flex flex-direction-column">
     <header>
-        <div id="count-win"></div>
-        <div id="count-lose"></div>
+        <div id="header-top" class="flex">
+            <div id="header-logo" class="flex flex-direction-column justify-center">
+                <img id="star-wars-logo" src="./assets/images/star-wars-logo.png" alt="Star Wars logo">
+                <span id="game-name">BATTLE ARENA</span>
+            </div>
+            <div id="header-counter">
+                <div id="count-win"></div>
+                <div id="count-lose"></div>
+            </div>
+        </div>
     </header>
-    <div id="char-select" class="flex"></div>
-    <div id="instructions" class="message"></div>
-    <div id="battle-result" class="message"></div>
-    <div id="battle-arena" class="flex">
-        <div id="battle-player" class="bat-player flex"></div>
-        <div class="battle flex"></div>
-        <div id="battle-enemy" class="bat-enemy flex"></div>
-    </div>
+
+    <main>
+        <div id="instructions" class="message"></div>
+        <div id="char-select" class="flex"></div>
+        <div id="battle-result" class="message"></div>
+        <div id="battle-arena" class="flex">
+            <div id="battle-player" class="bat-player flex"></div>
+            <div class="battle flex justify-center"></div>
+            <div id="battle-enemy" class="bat-enemy flex"></div>
+        </div>
+    </main>
 
 
 
