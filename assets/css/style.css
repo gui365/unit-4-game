@@ -1,7 +1,7 @@
 body {
   color: black;
   font-family: "Roboto", Arial, Helvetica, sans-serif;
-  margin-top: 2rem;
+  margin-top: 1rem;
   background-color: rgb(138, 138, 138);
 }
 
@@ -14,6 +14,10 @@ body {
 
 .bold {
   font-weight: 700;
+}
+
+header div {
+  margin: 0.5rem 0;
 }
 
 .char-card {
@@ -48,10 +52,13 @@ body {
 
 #instructions {
   font-size: 2rem;
+  margin-top: 1rem;
 }
 
 #battle-result {
-  font-size: 1.5rem;
+  font-size: 1rem;
+  font-weight: 400;
+  margin: 1rem 0;
 }
 
 .char-img {
@@ -102,7 +109,7 @@ body {
 
 #battle-arena {
   /* background-color: white; */
-  position: fixed;
+  /* position: fixed; */
   bottom: 40px;
   width: 100%;
 }
