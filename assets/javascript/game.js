@@ -126,7 +126,7 @@ var rpgGame = {
 
             rpgGame.enemy = false;
             rpgGame.charActive();
-            if ($("#char-select div").length === 0) {
+            if (playerLife <= 0) {
                 $("#instructions").text("You win!");
                 $("#battle-result").text("You have defeated all enemies");
                 $("#char-select").empty();
