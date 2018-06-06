@@ -5,10 +5,10 @@ var rpgGame = {
     countWin: 0,
     countLose: 0,
     // Available chars from which to choose:
-    characters: [ { name: "Luke Skywalker", life: 150, attack: 8, counterAttack: 25, player: false, enemy: false },
-                { name: "Jar Jar Binks", life: 120, attack: 5, counterAttack: 35, player: false, enemy: false },
-                { name: "Yoda", life: 175, attack: 12, counterAttack: 15, player: false, enemy: false },
-                { name: "Darth Vader", life: 250, attack: 10, counterAttack: 20, player: false, enemy: false } ],
+    characters: [ { name: "Luke Skywalker", life: 160, attack: 8, counterAttack: 18, player: false, enemy: false },
+                { name: "Jar Jar Binks", life: 150, attack: 10, counterAttack: 20, player: false, enemy: false },
+                { name: "Yoda", life: 175, attack: 9, counterAttack: 15, player: false, enemy: false },
+                { name: "Darth Vader", life: 200, attack: 11, counterAttack: 16, player: false, enemy: false } ],
     player: false,
     enemy: false,
     firstInstruction: function() {
@@ -17,7 +17,7 @@ var rpgGame = {
 
     repick: function(){
         var player = $("#battle-player").find(".char-card");
-        player.css({"z-index": "2", "width": "156px", "height": "200px"});
+        player.css({"z-index": "2", "width": "140px", "height": "180px"});
         player.addClass("hover-on");
         player.removeAttr("id");
         player.removeAttr("data-selected");
@@ -26,7 +26,7 @@ var rpgGame = {
         $("#char-select").append(player);
 
         var enemy = $("#battle-enemy").find(".char-card");
-        enemy.css({"z-index": "2", "width": "156px", "height": "200px"});
+        enemy.css({"z-index": "2", "width": "140px", "height": "180px"});
         enemy.addClass("hover-on");
         enemy.removeAttr("id");
         enemy.removeAttr("data-selected");
@@ -37,7 +37,6 @@ var rpgGame = {
         rpgGame.player = false;
         rpgGame.enemy = false;
         $(this).remove();
-        $("#versus").remove();
         $("#confirmButton").remove();
 
         rpgGame.firstInstruction();
@@ -114,6 +113,7 @@ var rpgGame = {
         // Substract enemy's counter-attack value from player's life
         playerLife -= enemyCounterAttack;
         player.attr("data-life", playerLife);
+        $("#battle-result").append("<br>" + enemyName + " attacked you back for " + enemyCounterAttack + " damage");    
         $("#char-life"+playerIndex).html("&nbsp;" + playerLife);
 
         // Conditional statements to determine if player won or lost
@@ -122,11 +122,14 @@ var rpgGame = {
             $("#battle-result").text("You have defeated " + enemyName);
             $("#instructions").text("Pick your next opponent");
             $(".battle").empty();
+            $(".battle").append("<img id='versus' src='./assets/images/vs.png' alt='VS'>");
+
             rpgGame.enemy = false;
             rpgGame.charActive();
             if ($("#char-select div").length === 0) {
                 $("#instructions").text("You win!");
                 $("#battle-result").text("You have defeated all enemies");
+                $("#char-select").empty();
                 rpgGame.countWin++;
                 $("#count-win").text("Wins: " + rpgGame.countWin);
                 // console.clear();
@@ -136,12 +139,13 @@ var rpgGame = {
         }
 
         if (playerLife <= 0) {
+            $("#char-select").empty()
             $("#battle-result").text("You have been defeated by " + enemyName);
             $("#instructions").text("You lose!");
             $(".battle").empty();
+            $(".battle").append("<img id='versus' src='./assets/images/vs.png' alt='VS'>");
             $("#battle-player").empty()
             $("#battle-enemy").empty()
-            $("#char-select").empty()
             rpgGame.enemy = false;
             rpgGame.countLose++;
             $("#count-lose").text("Losses: " + rpgGame.countLose);
@@ -202,7 +206,13 @@ createCards();
 function restartGame() {
     rpgGame.player = false;
     rpgGame.enemy = false;
+    $("#char-select").empty();
+    $(".battle").empty();
+    $(".battle").append("<img id='versus' src='./assets/images/vs.png' alt='VS'>");
+    $("#battle-enemy").empty();
+    $("#battle-enemy").append("<span class='span-title'>Enemy</span>");
     $("#battle-player").empty();
+    $("#battle-player").append("<span class='span-title'>Player</span>");
     $("#battle-result").text("");
     rpgGame.firstInstruction();
     createCards();
@@ -212,8 +222,10 @@ function restartGame() {
 // Choosing the player and enemy
 function selectPlayerEnemy() {
 
+    // Characters that are not selected
     if ($(this).attr("data-selected") !== "true") {
         
+        // If no characters have been selected, first character is the player
         if (rpgGame.player === false && rpgGame.enemy === false) {
             var selectedPlayer = "#char" + $(this).attr("data-id");
             $("#battle-player").append($(selectedPlayer));
@@ -221,16 +233,11 @@ function selectPlayerEnemy() {
             rpgGame.characters[$(this).attr("data-id")].player = true;
             $(selectedPlayer).attr("data-selected", true);
             $(selectedPlayer).removeClass("hover-on");
-            
-            var imageVersus = $("<img>");
-            imageVersus.attr("id", "versus");
-            imageVersus.attr("src", "./assets/images/vs.png");
-            imageVersus.attr("alt", "VS");
-            $(".battle").append(imageVersus);
 
             $("#instructions").empty();
             $("#instructions").text("Choose your enemy");
 
+        // If player has been selected, enemy will be selected
         } else if (rpgGame.player === true && rpgGame.enemy === false) {
             var selectedEnemy = "#char" + $(this).attr("data-id");
             $("#battle-enemy").append($(selectedEnemy));
@@ -239,7 +246,9 @@ function selectPlayerEnemy() {
             $(selectedEnemy).attr("data-selected", true);
             $(selectedEnemy).removeClass("hover-on");
 
+            // If 2 characters remain unselected, create buttons
             if ($("#char-select div").length === 4) {
+                
                 var repickButton = $("<button>Pick again</button>");
                 repickButton.click(rpgGame.repick);
                 $(".battle").append($(repickButton));
@@ -261,7 +270,7 @@ function selectPlayerEnemy() {
                 rpgGame.confirm();
             };
 
-            $("#instructions").empty();
+            $("#instructions").text("Confirm your selection");
             
         };
     }
@@ -273,8 +282,8 @@ function selectPlayerEnemy() {
     $(document).on("mouseover", ".hover-on", function(){
         $(this).css('z-index', "20");
         $(this).animate({
-            width: "180px",
-            height: "230px",
+            width: "156px",
+            height: "200px",
         }, "fast");
     });
 
@@ -282,8 +291,8 @@ function selectPlayerEnemy() {
     $(document).on("mouseleave", ".hover-on", function(){
         $(this).css('z-index', "2");
         $(this).animate({
-            width: "156px",
-            height: "200px"
+            width: "140px",
+            height: "180px"
         }, "fast");
     });
 

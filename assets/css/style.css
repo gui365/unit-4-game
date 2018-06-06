@@ -1,7 +1,10 @@
 body {
-  color: black;
+  color: white;
   font-family: "Roboto Condensed", Arial, Helvetica, sans-serif;
-  background-color: rgb(138, 138, 138);
+  background-color: black;
+  background-image: url("../images/arena.jpg");
+  background-repeat: no-repeat;
+  background-size: 100% 100vh;
 }
 
 .flex {
@@ -24,27 +27,29 @@ body {
 }
 
 #header-top {
-  background-color: black;
+  background-color: rgb(51, 49, 49);
+  background-image: url("../images/space.png");
+  background-size: cover;
   color: white;
   margin-bottom: 1.5rem;
   justify-content: space-between;
-  padding: 2rem;
+  padding: 1.2rem 3rem;
 }
 
 #header-top span {
   text-align: center;
-  font-size: 1.7rem;
+  font-size: 1.2rem;
   margin: 0.2rem;
   /* color: rgb(226, 212, 12); */
-  color: black;
+  color: rgb(196, 196, 196);
   font-family: "Exo 2", Arial, Helvetica, sans-serif;
-  text-shadow:
+  /* text-shadow:
   -1px 1px 5px rgba(255, 255, 255, 0.5),
-   1px 1px 2px rgba(255, 255, 255, 0.5);
+   1px 1px 3px rgba(255, 255, 255, 0.5); */
 }
 
 #star-wars-logo {
-  width: 200px;
+  width: 150px;
 }
 
 .char-card {
@@ -53,8 +58,8 @@ body {
   box-shadow: 0px 0px 0px 1px rgb(71, 71, 71),
         5px 5px 15px rgb(37, 37, 37);
   z-index: 2;
-  width: 156px;
-  height: 200px;
+  width: 140px;
+  height: 180px;
   margin-right: -60px;
   background-image: url("../images/back-card.jpg");
   background-size: cover;
@@ -67,7 +72,7 @@ body {
   color: rgb(206, 27, 27);
 }
 
-#char-select, #instructions, #battle-result {
+#instructions, #battle-result {
   width: 100%;
   text-align: center;
 }
@@ -78,14 +83,14 @@ body {
 }
 
 #instructions {
-  font-size: 2rem;
-  margin-top: 1rem;
+  font-size: 1.5rem;
 }
 
 #battle-result {
   font-size: 1rem;
   font-weight: 400;
   margin: 1rem 0;
+  background-color: black;
 }
 
 .char-img {
@@ -134,19 +139,29 @@ body {
   padding-left: 0.5rem;
 }
 
-#battle-arena {
-  /* background-color: white; */
-  /* position: fixed; */
+#battle-arena, #char-select {
   bottom: 40px;
   width: 100%;
-}
-
-#battle-player, #battle-enemy {
-  /* border: 1px dotted black; */
+  margin-top: 2rem;
 }
 
 #battle-player div, #battle-enemy div {
   margin: 0;
+}
+
+#battle-player, #battle-enemy {
+  height: 230px;
+  width: 190px;
+  border: 2px dashed rgb(121, 121, 121);
+  background-color: rgba(121, 121, 121, 0.3);
+  border-radius: 20px;
+  align-items: center;
+}
+
+.span-title {
+  position: absolute;
+  z-index: -20;
+  color: rgb(121, 121, 121);
 }
 
 .battle {
