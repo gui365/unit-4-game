@@ -126,7 +126,7 @@ var rpgGame = {
 
             rpgGame.enemy = false;
             rpgGame.charActive();
-            if (playerLife <= 0) {
+            if (playerLife > 0 && $("#char-select div").length === 0 && $("#battle-enemy div").length === 0) {
                 $("#instructions").text("You win!");
                 $("#battle-result").text("You have defeated all enemies");
                 $("#char-select").empty();
@@ -145,7 +145,6 @@ var rpgGame = {
             $(".battle").empty();
             $(".battle").append("<img id='versus' src='./assets/images/vs.png' alt='VS'>");
             $("#battle-player").empty()
-            $("#battle-enemy").empty()
             rpgGame.enemy = false;
             rpgGame.countLose++;
             $("#count-lose").text("Losses: " + rpgGame.countLose);
